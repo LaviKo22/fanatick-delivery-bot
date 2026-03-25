@@ -405,7 +405,10 @@ async function connectWhatsApp() {
 
     sock.ev.on('connection.update', ({ connection, lastDisconnect, qr }) => {
         if (qr) {
-            console.log('📱 Scan this QR code with WhatsApp on +447451267123')
+            const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(qr)}`
+            console.log('📱 SCAN THIS QR CODE:')
+            console.log(qrUrl)
+            console.log('Open the URL above in your browser and scan with WhatsApp on +447451267123')
         }
         if (connection === 'close') {
             const shouldReconnect = lastDisconnect?.error?.output?.statusCode !== DisconnectReason.loggedOut
